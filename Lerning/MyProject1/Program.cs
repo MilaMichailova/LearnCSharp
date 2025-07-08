@@ -51,4 +51,76 @@ Console.WriteLine($"decimal c = {c}");
 Console.WriteLine($"char cc = {cc}");
 Console.WriteLine($"string name = {name}");
 Console.WriteLine($"object obj = {obj}");
-Console.ReadLine();
+
+// Использовать var и dynamic, объяснить разницу
+
+var number = 1;
+// var — это неявно типизированная переменная,
+// компилятор определяет тип во время компиляции на основе присвоенного значения.
+// После объявления тип переменной фиксируется и не может изменяться.
+
+
+dynamic string1 = "44";
+// dynamic — это тип, который отключает проверку типов во время компиляции и переносит её на время выполнения.
+// Переменная dynamic может менять тип и вызывать методы, которые будут проверены во время выполнения.
+// Если метода нет — будет ошибка во время запуска.
+
+
+// number = "11"; // Ошибка компиляции! Нельзя присвоить строку переменной типа int
+// string1 = 44;
+// string1.NonExistentMethod();
+// Ошибка во время выполнения, так как у int нет такого метода
+
+
+// Попробовать nullable типы (int? x = null;)
+
+int? x = null;
+
+if (x.HasValue)
+{
+    Console.WriteLine("Значение x: " + x.Value);
+}
+else
+{
+    Console.WriteLine("Значение отсутствует");
+}
+
+x = 10;
+
+if (x.HasValue)
+{
+    Console.WriteLine("Значение x: " + x.Value);
+}
+else
+{
+    Console.WriteLine("Значение отсутствует");
+}
+
+
+// Написать программу, которая запрашивает имя пользователя и выводит приветствие
+
+
+Console.WriteLine("Как к Вам обращаться?");
+
+string UserName  = Console.ReadLine();
+
+if (UserName.Length > 1)
+{
+
+    Console.WriteLine($"Здраствуйте, {UserName}!");
+}
+else
+{
+    Console.WriteLine("Вы не представились");
+    Console.WriteLine("Введите Ваше имя и нажмите Enter");
+    UserName = Console.ReadLine();
+
+    if (UserName.Length > 1)
+    {
+        Console.WriteLine($"Здравствуйте, {UserName}!");
+    }
+    else
+    {
+        Console.WriteLine("Очень жаль, до свидания.");
+    }
+}
