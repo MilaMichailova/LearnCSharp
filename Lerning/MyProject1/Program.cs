@@ -1,54 +1,141 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Начиаю учить c#!");
 
-bool isLie = false; // bool: хранит значение true или false (логические литералы). Представлен системным типом System.Boolean
+using System;
+//Person person = new Person();
+//Person person1 = new Person("Vasya", 25);
+//Person person2 = new Person("Nina", 28);
+//Person person3 = new Person("Ivan", 45);
+////Console.WriteLine("класс Person с полями Name, Age");
+//Console.WriteLine($"Имя: {person.Name}, Возраст: {person.Age}");
+//Console.WriteLine($"Имя: {person1.Name}, Возраст: {person1.Age}");
+//Console.WriteLine($"Имя: {person2.Name}, Возраст: {person2.Age}");
+//Console.WriteLine($"Имя: {person3.Name}, Возраст: {person3.Age}");
+//Console.ReadLine();
 
-byte bit1 = 1; // byte: хранит целое число от 0 до 255 и занимает 1 байт. Представлен системным типом System.Byte
 
-sbyte bit2 = 102; // sbyte: хранит целое число от -128 до 127 и занимает 1 байт. Представлен системным типом System.SByte
 
-short n1 = 1; // short: хранит целое число от -32768 до 32767 и занимает 2 байта. Представлен системным типом System.Int16
+////class Person
+////{
+////    public string Name = "Vasya";
+////    public int Age = 29;
+////}
 
-ushort n2 = 102; // ushort: хранит целое число от 0 до 65535 и занимает 2 байта. Представлен системным типом System.UInt16
 
-int num = 0b101; // int: хранит целое число от -2147483648 до 2147483647 и занимает 4 байта.
-                 // Представлен системным типом System.Int32. Все целочисленные литералы по умолчанию представляют значения типа int:
+//class Person
+//{
+//    public string Name;
+//    public int Age;
 
-uint a = 10; // uint: хранит целое число от 0 до 4294967295 и занимает 4 байта. Представлен системным типом System.UInt32
+//    public Person()
+//    {
+//        Name = "Petya";
+//        Age = 40;
+//    }
 
-long l = -0b101; // long: хранит целое число от –9 223 372 036 854 775 808 до 9 223 372 036 854 775 807 и занимает 8 байт. Представлен системным типом System.Int64
+//    // Конструктор с параметрами
+//    public Person(string name, int age)
+//    {
+//        Name = name;
+//        Age = age;
+//    }
+//}
 
-ulong r = 11111111; // ulong: хранит целое число от 0 до 18 446 744 073 709 551 615 и занимает 8 байт. Представлен системным типом System.UInt64
+Person person = new Person();
+Person person1 = new Person("Vasya", 25);
+Person person2 = new Person("Nina", 28);
+Person person3 = new Person("Ivan", 45);
 
-float f = 3.1f; //float: хранит число с плавающей точкой от -3.4*1038 до 3.4*1038 и занимает 4 байта. Представлен системным типом System.Single необходим суффикс f
+Console.WriteLine($"Имя: {person.Name}, Возраст: {person.Age}");
+Console.WriteLine($"Имя: {person1.Name}, Возраст: {person1.Age}");
+Console.WriteLine($"Имя: {person2.Name}, Возраст: {person2.Age}");
+Console.WriteLine($"Имя: {person3.Name}, Возраст: {person3.Age}");
 
-double d = 2.5; // хранит число с плавающей точкой от ±5.0*10-324 до ±1.7*10308 и занимает 8 байта. Представлен системным типом System.Double
+// Выводим количество созданных объектов
+Console.WriteLine($"Всего создано объектов Person: {Person.ObjectCount}");
 
-decimal c = 2.333m; // необходим суффикс m//
-                    // decimal: хранит десятичное дробное число. Если употребляется без десятичной запятой,
-                    // имеет значение от ±1.0*10-28 до ±7.9228*1028, может хранить 28 знаков после запятой и занимает 16 байт. Представлен системным типом System.Decimal
+Car car1 = new Car("BMW", "m7", 2025);
+Car car2 = new Car("Audi", "a7", 2024);
+Car car3 = new Car("Volkswagen", "Tuareg", 2023);
+Car car4 = new Car("Mercedes - Benz", "gle 350", 2020);
 
-char cc = 'a'; //хранит одиночный символ в кодировке Unicode и занимает 2 байта. Представлен системным типом System.Char.
+// Выводим информацию о каждой машине
+car1.ShowInfo();
+car2.ShowInfo();
+car3.ShowInfo();
+car4.ShowInfo();
 
-string name = "mila"; // string: хранит набор символов Unicode. Представлен системным типом System.String. Этому типу соответствуют строковые литералы.
+car1.Start();
+car2.Start();
+car3.Start();
+car4.Start();
 
-object obj = "hello"; // может хранить значение любого типа данных и занимает 4 байта на 32-разрядной платформе и 8 байт на 64-разрядной платформе.
-                      // Представлен системным типом System.Object, который является базовым для всех других типов и классов .NET.
+car1.Drive();
+car2.Drive();
+car3.Drive();
+car4.Drive();
 
-Console.WriteLine($"bool isLie = {isLie}"); //Используется интерполяция строк $"текст {переменная}" для удобного вывода
-Console.WriteLine($"byte bit1 = {bit1}");
-Console.WriteLine($"sbyte bit2 = {bit2}");
-Console.WriteLine($"short n1 = {n1}");
-Console.WriteLine($"ushort n2 = {n2}");
-Console.WriteLine($"int num = {num}");
-Console.WriteLine($"uint a = {a}");
-Console.WriteLine($"long l = {l}");
-Console.WriteLine($"ulong r = {r}");
-Console.WriteLine($"float f = {f}");
-Console.WriteLine($"double d = {d}");
-Console.WriteLine($"decimal c = {c}");
-Console.WriteLine($"char cc = {cc}");
-Console.WriteLine($"string name = {name}");
-Console.WriteLine($"object obj = {obj}");
+car1.Stop();
+car2.Stop();
+car3.Stop();
+car4.Stop();
+
 Console.ReadLine();
+
+class Person
+{
+    public string Name;
+    public int Age;
+
+    // Статическое поле-счётчик
+    public static int ObjectCount = 0;
+
+    public Person()
+    {
+        Name = "Petya";
+        Age = 40;
+        ObjectCount++; // Увеличиваем счётчик при создании объекта
+    }
+
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+        ObjectCount++; // Увеличиваем счётчик при создании объекта
+    }
+}
+
+class Car
+{
+    public string Brand;
+    public string Model;
+    public int YearOfManufacture;
+
+    // Конструктор с параметрами
+    public Car(string brand, string model, int year)
+    {
+        Brand = brand;
+        Model = model;
+        YearOfManufacture = year;
+    }
+
+    // Метод для вывода информации о машине
+    public void ShowInfo()
+    {
+        Console.WriteLine($"Марка: {Brand}, Модель: {Model}, Год выпуска: {YearOfManufacture}");
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"Марка: {Brand}, Модель: {Model}, Engine started ready to move ");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"Марка: {Brand}, Модель: {Model}, Engine started, move, wroom-wroom, beep");
+    }
+    
+    public void Stop()
+    {
+        Console.WriteLine($"Марка: {Brand}, Модель: {Model}, Stopped, engine stopped");
+    }
+}
