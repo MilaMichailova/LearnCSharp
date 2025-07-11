@@ -1,54 +1,177 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Начиаю учить c#!");
+﻿//See https://aka.ms/new-console-template for more information
+//Console.WriteLine("Метод для вычисления суммы массива чисел.");
 
-bool isLie = false; // bool: хранит значение true или false (логические литералы). Представлен системным типом System.Boolean
+//BigInteger SumArrayForeach(BigInteger[] array) //объявляем метод возвращающий число инт принмающий массив инт(чисел)
+//{
+//    BigInteger sum = 0; //объявляем переменную сум типа инт-число и присваиваем 0
+//    foreach (BigInteger num in array) //в цикле перебираем кажый элемент(число)
+//        sum += num; //впеременную дум добавляем каждое число полученое в процессе работы цикла в процессе каждой итарации
+//    Console.WriteLine($"Результат работы метода суммы: {sum} "); //выводим сумму в консоль
+//    return sum; //останавливаем цикл
+//}
 
-byte bit1 = 1; // byte: хранит целое число от 0 до 255 и занимает 1 байт. Представлен системным типом System.Byte
+//SumArrayForeach([1, 5, 2, 7, 4]);//вызываем метод передавая необходимый массив как параметр
 
-sbyte bit2 = 102; // sbyte: хранит целое число от -128 до 127 и занимает 1 байт. Представлен системным типом System.SByte
 
-short n1 = 1; // short: хранит целое число от -32768 до 32767 и занимает 2 байта. Представлен системным типом System.Int16
+//Console.WriteLine("Метод , который меняет значение переменной через ref.");
 
-ushort n2 = 102; // ushort: хранит целое число от 0 до 65535 и занимает 2 байта. Представлен системным типом System.UInt16
+//static void ModifyValue(ref BigInteger value)
+//{
+//    value *= 2; // Удваиваем значение исходной переменной
+//}
 
-int num = 0b101; // int: хранит целое число от -2147483648 до 2147483647 и занимает 4 байта.
-                 // Представлен системным типом System.Int32. Все целочисленные литералы по умолчанию представляют значения типа int:
 
-uint a = 10; // uint: хранит целое число от 0 до 4294967295 и занимает 4 байта. Представлен системным типом System.UInt32
+//    BigInteger number = 5;
+//    Console.WriteLine($"До вызова метода: {number}"); // 5
 
-long l = -0b101; // long: хранит целое число от –9 223 372 036 854 775 808 до 9 223 372 036 854 775 807 и занимает 8 байт. Представлен системным типом System.Int64
+//    // Вызываем метод с ref
+//    ModifyValue(ref number);
 
-ulong r = 11111111; // ulong: хранит целое число от 0 до 18 446 744 073 709 551 615 и занимает 8 байт. Представлен системным типом System.UInt64
+//    Console.WriteLine($"После вызова метода: {number}"); // 10
 
-float f = 3.1f; //float: хранит число с плавающей точкой от -3.4*1038 до 3.4*1038 и занимает 4 байта. Представлен системным типом System.Single необходим суффикс f
 
-double d = 2.5; // хранит число с плавающей точкой от ±5.0*10-324 до ±1.7*10308 и занимает 8 байта. Представлен системным типом System.Double
 
-decimal c = 2.333m; // необходим суффикс m//
-                    // decimal: хранит десятичное дробное число. Если употребляется без десятичной запятой,
-                    // имеет значение от ±1.0*10-28 до ±7.9228*1028, может хранить 28 знаков после запятой и занимает 16 байт. Представлен системным типом System.Decimal
+//using System.Numerics;
 
-char cc = 'a'; //хранит одиночный символ в кодировке Unicode и занимает 2 байта. Представлен системным типом System.Char.
+//static BigInteger Factorial(BigInteger n)
+//{
+//    if (n <= 1)
+//        return 1;
+//    return n * Factorial(n - 1);
+//}
 
-string name = "mila"; // string: хранит набор символов Unicode. Представлен системным типом System.String. Этому типу соответствуют строковые литералы.
 
-object obj = "hello"; // может хранить значение любого типа данных и занимает 4 байта на 32-разрядной платформе и 8 байт на 64-разрядной платформе.
-                      // Представлен системным типом System.Object, который является базовым для всех других типов и классов .NET.
+//Console.WriteLine("Рекурсивный метод вычисления факториала.");
 
-Console.WriteLine($"bool isLie = {isLie}"); //Используется интерполяция строк $"текст {переменная}" для удобного вывода
-Console.WriteLine($"byte bit1 = {bit1}");
-Console.WriteLine($"sbyte bit2 = {bit2}");
-Console.WriteLine($"short n1 = {n1}");
-Console.WriteLine($"ushort n2 = {n2}");
-Console.WriteLine($"int num = {num}");
-Console.WriteLine($"uint a = {a}");
-Console.WriteLine($"long l = {l}");
-Console.WriteLine($"ulong r = {r}");
-Console.WriteLine($"float f = {f}");
-Console.WriteLine($"double d = {d}");
-Console.WriteLine($"decimal c = {c}");
-Console.WriteLine($"char cc = {cc}");
-Console.WriteLine($"string name = {name}");
-Console.WriteLine($"object obj = {obj}");
-Console.ReadLine();
+//while (true) // Бесконечный цикл для повторных вычислений
+//{
+//    Console.Write("Введите число для вычисления факториала: ");
+
+//    // Обработка некорректного ввода числа
+//    if (!BigInteger.TryParse(Console.ReadLine(), out BigInteger number))
+//    {
+//        Console.WriteLine("Ошибка: введите целое число!");
+//        continue;
+//    }
+
+//    if (number < 0)
+//        Console.WriteLine("Факториал отрицательного числа не определен");
+//    else
+//        Console.WriteLine($"{number}! = {Factorial(number)}");
+
+//    // Предложение продолжить
+//    Console.WriteLine("Введите (да/нет/y) для продолжения, или любой другой символ для выхода");
+//    string answer = Console.ReadLine().Trim().ToLower();
+
+//    if (answer != "да" && answer != "yes" && answer != "y")
+//    {
+//        Console.WriteLine("Выход из программы.");
+//        break;
+//    }
+//}
+
+
+
+//using System.Numerics;
+
+//Console.WriteLine("Проверка простоты числа");
+
+//while (true)
+//{
+//    Console.Write("Введите число: ");
+//    string input = Console.ReadLine();
+
+//    if (!int.TryParse(input, out int number))
+//    {
+//        Console.WriteLine("Ошибка ввода! Введите целое число.");
+//        continue;
+//    }
+
+//    // Выбираем метод проверки (можно заменить на другой)
+//    bool isPrime = IsPrimeBig(number);
+
+//    Console.WriteLine($"Число {number} {(isPrime ? "простое" : "составное")}");
+
+//    Console.Write("Проверить еще? (да/нет): ");
+//    if (Console.ReadLine().ToLower() != "да")
+//        break;
+//};
+
+
+//// Простейший метод проверки простоты (для маленьких чисел)
+//static bool IsPrimeBasic(int number)
+//{
+//    // Обработка особых случаев
+//    if (number <= 1) return false;
+//    if (number == 2) return true;
+//    if (number % 2 == 0) return false;
+
+//    // Проверяем делители до корня из числа
+//    for (int i = 3; i * i <= number; i += 2)
+//    {
+//        if (number % i == 0)
+//            return false;
+//    }
+//    return true;
+//};
+
+//// Более эффективный метод с кэшированием простых делителей
+//static bool IsPrimeOptimized(int number)
+//{
+//    if (number <= 1) return false;
+//    if (number <= 3) return true;
+//    if (number % 2 == 0 || number % 3 == 0) return false;
+
+//    // Проверяем делители вида 6k ± 1
+//    for (int i = 5; i * i <= number; i += 6)
+//    {
+//        if (number % i == 0 || number % (i + 2) == 0)
+//            return false;
+//    }
+//    return true;
+//};
+
+
+
+//// Метод для очень больших чисел (но медленный)
+//static bool IsPrimeBig(BigInteger number)
+//{
+//    if (number <= 1) return false;
+//    if (number == 2) return true;
+//    if (number % 2 == 0) return false;
+
+//    for (BigInteger i = 3; i * i <= number; i += 2)
+//    {
+//        if (number % i == 0)
+//            return false;
+//    }
+//    return true;
+//};
+
+Console.WriteLine("Перегрузка методов с разным набором параметров");
+    Logger log = new Logger();
+    log.Log("Vasya");                 // [LOG] Vasya
+    log.Log("Vasya", 6621);           // [ERROR 6621] Vasya
+    log.Log("Vasya", 6620, true);     // [CRITICAL 6620] Vasya
+
+    Console.WriteLine("\nНажмите любую клавишу для выхода...");
+    Console.ReadKey(); // Ждет нажатия ЛЮБОЙ клавиши}
+
+class Logger
+{
+    public void Log(string message)
+    {
+        Console.WriteLine($"[LOG] {message}");
+    }
+
+    public void Log(string message, int errorCode)
+    {
+        Console.WriteLine($"[ERROR {errorCode}] {message}");
+    }
+
+    public void Log(string message, int errorCode, bool isCritical)
+    {
+        string level = isCritical ? "CRITICAL" : "WARNING";
+        Console.WriteLine($"[{level} {errorCode}] {message}");
+    }
+}
