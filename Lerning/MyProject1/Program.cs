@@ -1,54 +1,222 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Начиаю учить c#!");
+Console.WriteLine("Hello, Lesson 5 Task");
 
-bool isLie = false; // bool: хранит значение true или false (логические литералы). Представлен системным типом System.Boolean
+Animal animal = new Animal("Hello! I'm an animal!");
+animal.Speak();
 
-byte bit1 = 1; // byte: хранит целое число от 0 до 255 и занимает 1 байт. Представлен системным типом System.Byte
+Dog rex = new Dog("Rex", "Hello! I'm a dog!");
+rex.Speak();
 
-sbyte bit2 = 102; // sbyte: хранит целое число от -128 до 127 и занимает 1 байт. Представлен системным типом System.SByte
+Cat tom = new Cat("Tom", "Hello! I'm a cat!");
+tom.Speak();
 
-short n1 = 1; // short: хранит целое число от -32768 до 32767 и занимает 2 байта. Представлен системным типом System.Int16
+Bird bird = new Bird();
+bird.Fly();
 
-ushort n2 = 102; // ushort: хранит целое число от 0 до 65535 и занимает 2 байта. Представлен системным типом System.UInt16
+Duck duck = new Duck();
+duck.Fly();
+duck.Swim();
 
-int num = 0b101; // int: хранит целое число от -2147483648 до 2147483647 и занимает 4 байта.
-                 // Представлен системным типом System.Int32. Все целочисленные литералы по умолчанию представляют значения типа int:
+Fish fish = new Fish();
+fish.Swim();
 
-uint a = 10; // uint: хранит целое число от 0 до 4294967295 и занимает 4 байта. Представлен системным типом System.UInt32
+Vehicle myCar = new Car(new GasolineEngine());
+myCar.Start();
+myCar.Drive();
+myCar.Stop();
 
-long l = -0b101; // long: хранит целое число от –9 223 372 036 854 775 808 до 9 223 372 036 854 775 807 и занимает 8 байт. Представлен системным типом System.Int64
+Console.WriteLine();
 
-ulong r = 11111111; // ulong: хранит целое число от 0 до 18 446 744 073 709 551 615 и занимает 8 байт. Представлен системным типом System.UInt64
+Vehicle myElectricBike = new Motorcycle(new ElectricEngine());
+myElectricBike.Start();
+myElectricBike.Drive();
+myElectricBike.Stop();
 
-float f = 3.1f; //float: хранит число с плавающей точкой от -3.4*1038 до 3.4*1038 и занимает 4 байта. Представлен системным типом System.Single необходим суффикс f
+Console.WriteLine();
 
-double d = 2.5; // хранит число с плавающей точкой от ±5.0*10-324 до ±1.7*10308 и занимает 8 байта. Представлен системным типом System.Double
+Vehicle myTruck = new Truck(new DieselEngine());
+myTruck.Start();
+myTruck.Drive();
+myTruck.Stop();
 
-decimal c = 2.333m; // необходим суффикс m//
-                    // decimal: хранит десятичное дробное число. Если употребляется без десятичной запятой,
-                    // имеет значение от ±1.0*10-28 до ±7.9228*1028, может хранить 28 знаков после запятой и занимает 16 байт. Представлен системным типом System.Decimal
-
-char cc = 'a'; //хранит одиночный символ в кодировке Unicode и занимает 2 байта. Представлен системным типом System.Char.
-
-string name = "mila"; // string: хранит набор символов Unicode. Представлен системным типом System.String. Этому типу соответствуют строковые литералы.
-
-object obj = "hello"; // может хранить значение любого типа данных и занимает 4 байта на 32-разрядной платформе и 8 байт на 64-разрядной платформе.
-                      // Представлен системным типом System.Object, который является базовым для всех других типов и классов .NET.
-
-Console.WriteLine($"bool isLie = {isLie}"); //Используется интерполяция строк $"текст {переменная}" для удобного вывода
-Console.WriteLine($"byte bit1 = {bit1}");
-Console.WriteLine($"sbyte bit2 = {bit2}");
-Console.WriteLine($"short n1 = {n1}");
-Console.WriteLine($"ushort n2 = {n2}");
-Console.WriteLine($"int num = {num}");
-Console.WriteLine($"uint a = {a}");
-Console.WriteLine($"long l = {l}");
-Console.WriteLine($"ulong r = {r}");
-Console.WriteLine($"float f = {f}");
-Console.WriteLine($"double d = {d}");
-Console.WriteLine($"decimal c = {c}");
-Console.WriteLine($"char cc = {cc}");
-Console.WriteLine($"string name = {name}");
-Console.WriteLine($"object obj = {obj}");
 Console.ReadLine();
+
+class Animal
+{
+    private string _message;
+
+    public string Message
+    {
+        get { return _message; }
+        set { _message = value; }
+    }
+
+    public Animal(string message)
+    {
+        _message = message;
+    }
+
+    public virtual void Speak()
+    {
+        Console.WriteLine(Message);
+    }
+}
+
+class Dog : Animal
+{
+    public string Name { get; set; }
+
+    public Dog(string name, string message) : base(message)
+    {
+        Name = name;
+    }
+
+    public override void Speak()
+    {
+        Console.WriteLine($"{Message} My name is {Name}.");
+    }
+}
+
+class Cat : Animal
+{
+    public string Name { get; set; }
+
+    public Cat(string name, string message) : base(message)
+    {
+        Name = name;
+    }
+
+    public override void Speak()
+    {
+        Console.WriteLine($"{Message} My name is {Name}.");
+    }
+}
+
+// Интерфейс возможность летать
+interface IFlyable
+{
+    void Fly();
+}
+
+// Класс птица реализующая интерфейс IFlyable
+class Bird : IFlyable
+{
+    public void Fly()
+    {
+        Console.WriteLine("The bird is flying.");
+    }
+}
+
+
+// Интерфейс двигателя
+interface IEngine
+{
+    void Start();
+    void Stop();
+    string GetEngineType();
+}
+
+// Конкретные реализации двигателей
+class GasolineEngine : IEngine
+{
+    public void Start() => Console.WriteLine("Gasoline engine started.");
+    public void Stop() => Console.WriteLine("Gasoline engine stopped.");
+    public string GetEngineType() => "Gasoline Engine";
+}
+
+class ElectricEngine : IEngine
+{
+    public void Start() => Console.WriteLine("Electric engine started silently.");
+    public void Stop() => Console.WriteLine("Electric engine stopped.");
+    public string GetEngineType() => "Electric Engine";
+}
+
+class DieselEngine : IEngine
+{
+    public void Start() => Console.WriteLine("Diesel engine started with a roar.");
+    public void Stop() => Console.WriteLine("Diesel engine stopped.");
+    public string GetEngineType() => "Diesel Engine";
+}
+
+// Базовый класс транспортного средства
+abstract class Vehicle
+{
+    protected IEngine Engine;
+
+    public Vehicle(IEngine engine)
+    {
+        Engine = engine;
+    }
+
+    public virtual void Start()
+    {
+        Console.WriteLine($"Starting vehicle with {Engine.GetEngineType()}");
+        Engine.Start();
+    }
+
+    public virtual void Stop()
+    {
+        Console.WriteLine("Stopping vehicle...");
+        Engine.Stop();
+    }
+
+    public abstract void Drive();
+}
+
+// Конкретные транспортные средства
+class Car : Vehicle
+{
+    public Car(IEngine engine) : base(engine) { }
+
+    public override void Drive()
+    {
+        Console.WriteLine("Car is driving.");
+    }
+}
+
+class Truck : Vehicle
+{
+    public Truck(IEngine engine) : base(engine) { }
+
+    public override void Drive()
+    {
+        Console.WriteLine("Truck is hauling cargo.");
+    }
+}
+
+class Motorcycle : Vehicle
+{
+    public Motorcycle(IEngine engine) : base(engine) { }
+
+    public override void Drive()
+    {
+        Console.WriteLine("Motorcycle is speeding on the road.");
+    }
+}
+
+// Интерфейс возможность плавать
+interface ISwimmable
+{
+    void Swim();
+}
+
+// Класс Утка  реализующая интерфейс IFlyable и ISwimmable
+class Duck : IFlyable, ISwimmable
+{
+    public void Fly()
+    {
+        Console.WriteLine("The Duck is flying.");
+    }
+    public void Swim()
+    {
+        Console.WriteLine("The Duck is swiming.");
+    }
+}
+
+class Fish : ISwimmable
+{
+    public void Swim()
+    {
+        Console.WriteLine("The Fish is swiming.");
+    }
+}
