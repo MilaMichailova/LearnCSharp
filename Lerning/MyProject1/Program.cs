@@ -1,54 +1,236 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-Console.WriteLine("Начиаю учить c#!");
+Console.WriteLine("Lesson, 6 Task");
 
-bool isLie = false; // bool: хранит значение true или false (логические литералы). Представлен системным типом System.Boolean
+Student alice = new Student(1, "Alice");
+Student bob = new Student(2, "Bob");
 
-byte bit1 = 1; // byte: хранит целое число от 0 до 255 и занимает 1 байт. Представлен системным типом System.Byte
+Course math = new Course("MATH101", "Mathematics");
+Course physics = new Course("PHYS101", "Physics");
 
-sbyte bit2 = 102; // sbyte: хранит целое число от -128 до 127 и занимает 1 байт. Представлен системным типом System.SByte
+// Записываем студентов на курсы
+alice.EnrollInCourse(math);
+alice.EnrollInCourse(physics);
 
-short n1 = 1; // short: хранит целое число от -32768 до 32767 и занимает 2 байта. Представлен системным типом System.Int16
+bob.EnrollInCourse(physics);
 
-ushort n2 = 102; // ushort: хранит целое число от 0 до 65535 и занимает 2 байта. Представлен системным типом System.UInt16
+// Выводим информацию
+alice.ShowCourses();
+Console.WriteLine();
+bob.ShowCourses();
+Console.WriteLine();
 
-int num = 0b101; // int: хранит целое число от -2147483648 до 2147483647 и занимает 4 байта.
-                 // Представлен системным типом System.Int32. Все целочисленные литералы по умолчанию представляют значения типа int:
+math.ShowStudents();
+Console.WriteLine();
+physics.ShowStudents();
 
-uint a = 10; // uint: хранит целое число от 0 до 4294967295 и занимает 4 байта. Представлен системным типом System.UInt32
+// Вводим информацию о доме и комнатах
+House myHouse = new House("123 Main Street");
 
-long l = -0b101; // long: хранит целое число от –9 223 372 036 854 775 808 до 9 223 372 036 854 775 807 и занимает 8 байт. Представлен системным типом System.Int64
+myHouse.AddRoom("Living Room", 25.5);
+myHouse.AddRoom("Kitchen", 12.3);
+myHouse.AddRoom("Bedroom", 18.0);
 
-ulong r = 11111111; // ulong: хранит целое число от 0 до 18 446 744 073 709 551 615 и занимает 8 байт. Представлен системным типом System.UInt64
+// Выводим информацию
+myHouse.ShowRooms();
 
-float f = 3.1f; //float: хранит число с плавающей точкой от -3.4*1038 до 3.4*1038 и занимает 4 байта. Представлен системным типом System.Single необходим суффикс f
 
-double d = 2.5; // хранит число с плавающей точкой от ±5.0*10-324 до ±1.7*10308 и занимает 8 байта. Представлен системным типом System.Double
 
-decimal c = 2.333m; // необходим суффикс m//
-                    // decimal: хранит десятичное дробное число. Если употребляется без десятичной запятой,
-                    // имеет значение от ±1.0*10-28 до ±7.9228*1028, может хранить 28 знаков после запятой и занимает 16 байт. Представлен системным типом System.Decimal
+var author = new Author("Leo Tolstoy");
+var address = new Address("Lenina St.", "Moscow");
+var library = new Library("Central Library", address);
 
-char cc = 'a'; //хранит одиночный символ в кодировке Unicode и занимает 2 байта. Представлен системным типом System.Char.
+library.AddBook("War and Peace", author);
+library.AddBook("Anna Karenina", author);
 
-string name = "mila"; // string: хранит набор символов Unicode. Представлен системным типом System.String. Этому типу соответствуют строковые литералы.
+Console.WriteLine($"Library: {library.Name}, located at {library.Address.Street}, {library.Address.City}");
+foreach (var book in library.Books)
+{
+    Console.WriteLine($"Book: {book.Title}, Author: {book.Author.Name}");
+}
 
-object obj = "hello"; // может хранить значение любого типа данных и занимает 4 байта на 32-разрядной платформе и 8 байт на 64-разрядной платформе.
-                      // Представлен системным типом System.Object, который является базовым для всех других типов и классов .NET.
-
-Console.WriteLine($"bool isLie = {isLie}"); //Используется интерполяция строк $"текст {переменная}" для удобного вывода
-Console.WriteLine($"byte bit1 = {bit1}");
-Console.WriteLine($"sbyte bit2 = {bit2}");
-Console.WriteLine($"short n1 = {n1}");
-Console.WriteLine($"ushort n2 = {n2}");
-Console.WriteLine($"int num = {num}");
-Console.WriteLine($"uint a = {a}");
-Console.WriteLine($"long l = {l}");
-Console.WriteLine($"ulong r = {r}");
-Console.WriteLine($"float f = {f}");
-Console.WriteLine($"double d = {d}");
-Console.WriteLine($"decimal c = {c}");
-Console.WriteLine($"char cc = {cc}");
-Console.WriteLine($"string name = {name}");
-Console.WriteLine($"object obj = {obj}");
 Console.ReadLine();
+
+
+// Класс Student
+class Student
+{
+    public string Name { get; set; }
+    public int Id { get; set; }
+
+    // Курсы, на которые записан студент
+    private List<Course> courses = new List<Course>();
+
+    public Student(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+
+    // Добавить курс студенту
+    public void EnrollInCourse(Course course)
+    {
+        if (!courses.Contains(course))
+        {
+            courses.Add(course);
+            course.AddStudent(this); // поддерживаем связь с обеих сторон
+        }
+    }
+
+    public void ShowCourses()
+    {
+        Console.WriteLine($"Student {Name} is enrolled in courses:");
+        foreach (var course in courses)
+        {
+            Console.WriteLine($"- {course.Title}");
+        }
+    }
+}
+
+// Класс Course
+class Course
+{
+    public string Title { get; set; }
+    public string Code { get; set; }
+
+    // Студенты, записанные на курс
+    private List<Student> students = new List<Student>();
+
+    public Course(string code, string title)
+    {
+        Code = code;
+        Title = title;
+    }
+
+    // Добавить студента на курс
+    public void AddStudent(Student student)
+    {
+        if (!students.Contains(student))
+        {
+            students.Add(student);
+            // Чтобы избежать бесконечной рекурсии, не вызываем student.EnrollInCourse здесь
+        }
+    }
+
+    public void ShowStudents()
+    {
+        Console.WriteLine($"Course {Title} has students:");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"- {student.Name}");
+        }
+    }
+}
+
+
+// Класс Room — часть House
+class Room
+{
+    public string Name { get; private set; }
+    public double Area { get; private set; } // площадь в кв.м
+
+    public Room(string name, double area)
+    {
+        Name = name;
+        Area = area;
+    }
+
+    public void ShowInfo()
+    {
+        Console.WriteLine($"Room: {Name}, Area: {Area} m*2 ");
+    }
+}
+
+// Класс House — содержит комнаты (композиция)
+class House
+{
+    public string Address { get; private set; }
+
+    // Список комнат — создаётся и управляется домом
+    private List<Room> rooms = new List<Room>();
+
+    public House(string address)
+    {
+        Address = address;
+    }
+
+    // Добавление комнаты в дом
+    public void AddRoom(string name, double area)
+    {
+        Room room = new Room(name, area);
+        rooms.Add(room);
+    }
+
+    // Вывод информации о доме и комнатах
+    public void ShowRooms()
+    {
+        Console.WriteLine($"House at {Address} has rooms:");
+        foreach (var room in rooms)
+        {
+            room.ShowInfo();
+        }
+    }
+}
+
+
+// Ассоциация: Book знает Author, но не владеет им
+public class Author
+{
+    public string Name { get; set; }
+    public Author(string name) => Name = name;
+}
+
+public class Book
+{
+    public string Title { get; set; }
+
+    // Ассоциация: ссылка на автора (не владеет им)
+    public Author Author { get; set; }
+
+    public Book(string title, Author author)
+    {
+        Title = title;
+        Author = author;
+    }
+}
+
+// Агрегация: Address существует отдельно, Library хранит ссылку на него
+public class Address
+{
+    public string Street { get; set; }
+    public string City { get; set; }
+
+    public Address(string street, string city)
+    {
+        Street = street;
+        City = city;
+    }
+}
+
+// Композиция: Library владеет книгами, создаёт и уничтожает их
+public class Library
+{
+    public string Name { get; set; }
+
+    // Агрегация: адрес передаётся извне
+    public Address Address { get; set; }
+
+    // Композиция: библиотека владеет книгами
+    private List<Book> books = new List<Book>();
+
+    public Library(string name, Address address)
+    {
+        Name = name;
+        Address = address;
+    }
+
+    // Метод добавления книги — библиотека создаёт книги сама
+    public void AddBook(string title, Author author)
+    {
+        books.Add(new Book(title, author));
+    }
+
+    public IEnumerable<Book> Books => books.AsReadOnly();
+}
+//Ассоциация: Book содержит ссылку на Author. Автор создаётся отдельно, книга просто хранит ссылку.
+//Агрегация: Library имеет ссылку на Address, который создаётся вне библиотеки. Адрес может существовать отдельно.
+//Композиция: Library создаёт и хранит объекты Book в своём списке — книги не существуют без библиотеки.
